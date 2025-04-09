@@ -1,4 +1,54 @@
 gitToken.rtf
 git_key
 git_key.pub
-__pycache__
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Environment variable / secret config
+.env
+*.env
+
+# macOS-specific metadata
+.DS_Store
+
+# IDEs/editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Log and database files
+*.log
+*.sqlite3
+*.db
+
+# Coverage/test output
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# PyInstaller output
+*.spec
+
+# System files
+Thumbs.db

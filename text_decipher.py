@@ -3,23 +3,35 @@ import json
 from vosk import Model, KaldiRecognizer
 
 def speech_to_text(record_loc):
-    # Load your downloaded model
+    # Load your downloaded model (you can move this outside the function for speed if reused)
     model = Model("vosk-model-small-en-us-0.15")
 
-    # Open audio file (WAV format)
+    # Open WAV file
     wf = wave.open(record_loc, "rb")
 
-    # Initialize recognizer
+    # Check WAV format (mono, PCM)
+    if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
+        raise ValueError("Audio file must be WAV format: mono PCM 16-bit")
+
+    # Setup recognizer
     rec = KaldiRecognizer(model, wf.getframerate())
 
-    # Read audio in chunks and print results
+    # Transcription result
+    transcript = []
+
     while True:
         data = wf.readframes(4000)
         if len(data) == 0:
             break
         if rec.AcceptWaveform(data):
             result = json.loads(rec.Result())
+            transcript.append(result.get('text', ''))
 
+    # Append final result
     final_result = json.loads(rec.FinalResult())
-    print("Transcription:", final_result['text'])
-    return(final_result['text'])
+    transcript.append(final_result.get('text', ''))
+
+    full_transcription = ' '.join(transcript).strip()
+
+    print("Transcription:", full_transcription)
+    return full_transcription
