@@ -32,6 +32,7 @@ class NewFileHandler(FileSystemEventHandler):
                 # Example placeholder for your custom function
                 result = speech_to_text(event.src_path)
                 # result = speech_to_text("/Users/kumarutkarshsingh/newLife/2ndVoice/recordings/1New Recording copy.wav")
+
                 convo.append({"role": "user", "content": result})
                 # messages = compile_message(convo)
                 messages = list(convo)
